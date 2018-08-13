@@ -1,0 +1,24 @@
+{
+  "name": "react-material",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^1.0.0",
+    "@material-ui/icons": "^1.0.0",
+    "autosuggest-highlight": "^3.1.1",
+    "cors": "^2.8.4",
+    "install": "^0.11.0",
+    "material-ui-search-bar": "^0.4.2",
+    "npm": "^6.0.1",
+    "react": "^16.3.2",
+    "react-autosuggest": "^9.3.4",
+    "react-dom": "^16.3.2",
+    "react-scripts": "1.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start | node server/server.js",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
