@@ -51,30 +51,7 @@ const data2 = [
   createData('Deansgate', "18.00"),
 ]
 
-
-
-function getMetroLinks() {
-  fetch("https://api.tfgm.com/odata/Metrolinks?$top=10", {
-    method: 'get',
-    headers: new Headers({'Ocp-Apim-Subscription-Key':'a5d66354dc2642f681f9b24159f49999' }),
-  })
-  .then(res => { res.json()})
-  .then(
-    (result) => {
-      console.log(result);
-    },
-    // Note: it's important to handle errors here
-    // instead of a catch() block so that we don't swallow
-    // exceptions from actual bugs in components.
-    (error) => {
-      console.log(error)
-    }
-  )
-}
-
 function getData(selectedStation) {
-  getMetroLinks();
-
   if(selectedStation == "Media City")
     return data;
     else 
@@ -82,8 +59,6 @@ function getData(selectedStation) {
 } 
 
 function CustomizedTable(props) {
-  console.log(props.selectedStation)
-
   const { classes } = props;
   return (
     <Paper className={classes.root}>

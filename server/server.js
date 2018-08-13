@@ -16,7 +16,7 @@ app.use(cors({origin: '*'}));
 
 router.get('/tramstops', function(req, res) {
     var options = {
-        url: 'https://api.tfgm.com/odata/Metrolinks?$top=10',
+        url: 'https://api.tfgm.com/odata/Metrolinks?$top=50',
         headers: {
           'User-Agent': 'TramApp',
           'Ocp-Apim-Subscription-Key': 'a5d66354dc2642f681f9b24159f49999'

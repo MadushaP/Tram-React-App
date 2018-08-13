@@ -33,8 +33,8 @@ function renderInput(inputProps) {
 }
 
 function renderSuggestion(suggestion, { query, isHighlighted }) {
-    const matches = match(suggestion.station, query);
-    const parts = parse(suggestion.station, matches);
+    const matches = match(suggestion.StationLocation, query);
+    const parts = parse(suggestion.StationLocation, matches);
 
     return (
         <MenuItem selected={isHighlighted} component="div">
@@ -66,7 +66,7 @@ function renderSuggestionsContainer(options) {
 }
 
 function getSuggestionValue(suggestion) {
-    return suggestion.station;
+    return suggestion.StationLocation;
 }
 
 function removeDuplicates(originalArray, objKey) {
@@ -87,17 +87,17 @@ function removeDuplicates(originalArray, objKey) {
 }
 
 function checkSubtring(suggestion, value) {
-    return (suggestion.station.toLowerCase()).includes(value.toLowerCase());
+    return (suggestion.StationLocation.toLowerCase()).includes(value.toLowerCase());
 }
 
 function getSuggestions(value) {
-    var filterSuggestions = []    
+    var filterSuggestions = []
     fetch('http://localhost:8080/tramstops')
         .then(response => response.json())
         .then(response => {
-            suggestions = response.value.map(element => ({ station: element.StationLocation }))
-        }).then(function () {            
-           suggestions =  suggestions.filter(((suggestion) => checkSubtring(suggestion, value)))
+            suggestions = response.value
+        }).then(function () {
+            suggestions = suggestions.filter(((suggestion) => checkSubtring(suggestion, value)))
         })
     return removeDuplicates(suggestions, "station");
 }
