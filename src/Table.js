@@ -82,7 +82,8 @@ function getData(selectedStation) {
 } 
 
 function CustomizedTable(props) {
-  
+  console.log(props.selectedStation)
+
   const { classes } = props;
   return (
     <Paper className={classes.root}>
@@ -94,6 +95,7 @@ function CustomizedTable(props) {
           </TableRow>
         </TableHead>
         <TableBody>
+          
           {getData(props.selectedStation).map(n => {
             return (
               <TableRow className={classes.row} key={n.id}>
@@ -104,6 +106,7 @@ function CustomizedTable(props) {
               </TableRow>
             );
           })}
+
         </TableBody>
       </Table>
     </Paper>

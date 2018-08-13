@@ -84,7 +84,6 @@ function removeDuplicates(originalArray, objKey) {
     }
 
     return trimmedArray;
-
 }
 
 function checkSubtring(suggestion, value) {
@@ -161,9 +160,10 @@ class IntegrationAutosuggest extends React.Component {
         });
     };
 
-    onSuggestionSelected = () => {
+    onSuggestionSelected = (event, { suggestion }) => {
         this.setState({
-            showResults: true
+            showResults: true,
+            selectedSuggestion: suggestion
         });
     }
 
@@ -195,7 +195,7 @@ class IntegrationAutosuggest extends React.Component {
                     }}
                     onSuggestionSelected={this.onSuggestionSelected}
                 />
-                {this.state.showResults ? <Table selectedStation={this.state.value} /> : null}
+                {this.state.showResults ? <Table selectedStation={this.state.selectedSuggestion} /> : null}
             </div>
 
         );
