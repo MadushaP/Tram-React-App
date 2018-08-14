@@ -58,6 +58,7 @@ function removeDuplicates(originalArray, objKey) {
 }
 
 function compareStrings(a, b) {
+  console.log(a,b)
   a = a.toLowerCase();
   b = b.toLowerCase();
 
@@ -68,11 +69,12 @@ function cleanseData(arrivalsWithExtractedTime) {
   var cleanArrivals = []
 
   arrivalsWithExtractedTime.forEach(element => {
-    if (element.destination.length || element.arrivalTime.length || element.arrivalTime.length > 1)
+    if (element.destination.length || element.arrivalTime.length > 1)
       cleanArrivals.push(element)
   });
+  var dataWithRemovedDuplication = removeDuplicates(cleanArrivals, "arrivalTime");
 
-  return removeDuplicates(cleanArrivals, "arrivalTime").sort(function (a, b) {
+  return dataWithRemovedDuplication.sort(function (a, b) {
     return compareStrings(a.arrivalTime, b.arrivalTime);
   }).sort(function (a, b) {
     return compareStrings(a.direction, b.direction);
