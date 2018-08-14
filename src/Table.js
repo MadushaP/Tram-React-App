@@ -41,10 +41,17 @@ function createData(stationName, line, destination, arrivalTime) {
   return { id, stationName, line , destination, arrivalTime };
 }
 
-function getData(selectedStation) {
-  console.log(selectedStation)
- return [createData(selectedStation.StationLocation, selectedStation.Line, selectedStation.Dest0, selectedStation.Wait0)];
-} 
+function extractArrivalTime(selectedStation) {
+  var arrivalTime = [selectedStation.Wait0, selectedStation.Wait1, selectedStation.Wait2]
+  var arrivals = []
+
+  arrivalTime.map(time => {
+    if(time != "") {
+      arrivals.push(createData(selectedStation.StationLocation, selectedStation.Line, selectedStation.Dest0, time))
+    }
+  })
+  return arrivals;
+}
 
 function CustomizedTable(props) {
   const { classes } = props;
@@ -60,9 +67,8 @@ function CustomizedTable(props) {
             <CustomTableCell>Arrival time</CustomTableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
-          
-          {getData(props.selectedSuggestion).map(station => {
+        <TableBody>          
+          {extractArrivalTime(props.selectedSuggestion).map(station => {
             return (
               <TableRow className={classes.row} key={station.id}>
                 <CustomTableCell component="th" scope="row"> {station.stationName} </CustomTableCell>
