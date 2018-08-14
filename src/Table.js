@@ -82,17 +82,21 @@ function cleanseData(arrivalsWithExtractedTime) {
 function extractArrivalTime(selectedStation) {
   var arrivalsWithExtractedTimes = []
 
-
   selectedStation.map(station => {
     arrivalsWithExtractedTimes.push(
       createData(station.StationLocation, station.Line, station.Dest0, station.Wait0, station.Direction),
       createData(station.StationLocation, station.Line, station.Dest0, station.Wait1, station.Direction),
       createData(station.StationLocation, station.Line, station.Dest0, station.Wait2, station.Direction))
-  }
-  )
+  })
 
   return cleanseData(arrivalsWithExtractedTimes);
+}
 
+function formatArrivalTime(arrivalTime) {
+  if (arrivalTime == 0)
+    return "Due now"
+  else
+    return arrivalTime + " minutes";
 }
 
 function CustomizedTable(props) {
@@ -117,7 +121,7 @@ function CustomizedTable(props) {
                 <CustomTableCell component="th" scope="row"> {station.line} </CustomTableCell>
                 <CustomTableCell component="th" scope="row"> {station.direction} </CustomTableCell>
                 <CustomTableCell component="th" scope="row"> {station.destination} </CustomTableCell>
-                <CustomTableCell > In {station.arrivalTime} minutes.</CustomTableCell>
+                <CustomTableCell >{formatArrivalTime(station.arrivalTime)}</CustomTableCell>
               </TableRow>
             );
           })}
