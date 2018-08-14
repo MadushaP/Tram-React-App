@@ -57,29 +57,46 @@ function removeDuplicates(originalArray, objKey) {
   return trimmedArray;
 }
 
-function extractArrivalTime(selectedStation) {
-  var arrivalsWithExtractedTimes = []
+function compareStrings(a, b) {
+  a = a.toLowerCase();
+  b = b.toLowerCase();
+
+  return (a < b) ? -1 : (a > b) ? 1 : 0;
+}
+
+function cleanseData(arrivalsWithExtractedTime) {
   var cleanArrivals = []
 
- selectedStation.map(station => {
-  arrivalsWithExtractedTimes.push(
+  arrivalsWithExtractedTime.forEach(element => {
+    if (element.destination.length || element.arrivalTime.length || element.arrivalTime.length > 1)
+      cleanArrivals.push(element)
+  });
+
+  return removeDuplicates(cleanArrivals, "arrivalTime").sort(function (a, b) {
+    return compareStrings(a.arrivalTime, b.arrivalTime);
+  }).sort(function (a, b) {
+    return compareStrings(a.direction, b.direction);
+  });
+}
+
+function extractArrivalTime(selectedStation) {
+  var arrivalsWithExtractedTimes = []
+
+
+  selectedStation.map(station => {
+    arrivalsWithExtractedTimes.push(
       createData(station.StationLocation, station.Line, station.Dest0, station.Wait0, station.Direction),
       createData(station.StationLocation, station.Line, station.Dest0, station.Wait1, station.Direction),
       createData(station.StationLocation, station.Line, station.Dest0, station.Wait2, station.Direction))
-    }
+  }
   )
 
-  arrivalsWithExtractedTimes.forEach(element => {
-    if(element.destination.length || element.arrivalTime.length || element.arrivalTime.length > 1)
-    cleanArrivals.push(element)    
-  });
+  return cleanseData(arrivalsWithExtractedTimes);
 
-  return  removeDuplicates(cleanArrivals, "arrivalTime");
 }
 
 function CustomizedTable(props) {
   const { classes } = props;
-
   return (
     <Paper className={classes.root}>
       <Table className={classes.table}>
