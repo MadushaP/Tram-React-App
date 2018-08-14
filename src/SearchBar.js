@@ -123,17 +123,19 @@ function checkSubtring(suggestion, value) {
 }
 
 function getSuggestions(value) {
-    var filterSuggestions = []
     fetch('http://localhost:8080/tramstops')
         .then(response => response.json())
         .then(response => {
             suggestions = response.value
         }).then(function () {
-            suggestions = suggestions.filter(((suggestion) => checkSubtring(suggestion, value)))
+            suggestions = suggestions.filter(((suggestion) => { return checkSubtring(suggestion, value) }))
         })
     return removeDuplicates(suggestions, "station");
 }
 
+function filterExactStation(suggestions, suggestion) {
+    return suggestions.filter(a => a.StationLocation = suggestion.StationLocation);
+}
 
 class IntegrationAutosuggest extends React.Component {
     state = {
@@ -145,7 +147,7 @@ class IntegrationAutosuggest extends React.Component {
     handleSuggestionsFetchRequested = ({ value }) => {
         this.setState({
             suggestions: getSuggestions(value)
-      });
+        });
     };
 
     handleSuggestionsClearRequested = () => {
@@ -161,10 +163,9 @@ class IntegrationAutosuggest extends React.Component {
     };
 
     onSuggestionSelected = (event, { suggestion }) => {
-        console.log(suggestions)
         this.setState({
             showResults: true,
-            selectedSuggestion: suggestions
+            selectedSuggestion: filterExactStation(suggestions, suggestion),
         });
     }
 

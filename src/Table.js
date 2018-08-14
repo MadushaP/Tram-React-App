@@ -73,7 +73,7 @@ function extractArrivalTime(selectedStation) {
     if(element.destination.length || element.arrivalTime.length || element.arrivalTime.length > 1)
     cleanArrivals.push(element)    
   });
-  
+
   return  removeDuplicates(cleanArrivals, "arrivalTime");
 }
 
