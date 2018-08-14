@@ -3,8 +3,7 @@ var app        = express();
 var bodyParser = require('body-parser');
 var request = require('request');
 var cors = require('cors');
-
-
+var dotenv = require('dotenv').config()
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -13,6 +12,11 @@ var port = process.env.PORT || 8080;
 // =============================================================================
 var router = express.Router();             
 app.use(cors({origin: '*'}));
+
+router.get('/mapApi', function(req, res) {
+    res.send(process.env.MAP_API);
+});
+
 
 router.get('/tramstops', function(req, res) {
     var options = {

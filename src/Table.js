@@ -8,6 +8,16 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+
+var mediaCityMapUrl = ""
+
+fetch('http://localhost:8080/mapApi').then(response => response.text()).then(key => { 
+  mediaCityMapUrl = "https://www.google.com/maps/embed/v1/place?q=place_id:ChIJs9oFOTepe0gRQxVZHolOKEg&key=[Key]".replace("[Key]", key) 
+})
+
+
+
+
 const CustomTableCell = withStyles(theme => ({
   head: {
     backgroundColor: theme.palette.common.black,
@@ -58,7 +68,6 @@ function removeDuplicates(originalArray, objKey) {
 }
 
 function compareStrings(a, b) {
-  console.log(a,b)
   a = a.toLowerCase();
   b = b.toLowerCase();
 
@@ -101,6 +110,16 @@ function formatArrivalTime(arrivalTime) {
     return arrivalTime + " minutes";
 }
 
+function stationToMapUrl(station)  {
+   switch(station.StationLocation){
+    case "MediaCityUK":
+      return mediaCityMapUrl;
+    break;
+    default:
+     return ""
+   }
+}
+
 function CustomizedTable(props) {
   const { classes } = props;
   return (
@@ -127,9 +146,11 @@ function CustomizedTable(props) {
               </TableRow>
             );
           })}
-
         </TableBody>
       </Table>
+      <div>
+        <iframe  padding-top="20" width="100%" height="450" src={stationToMapUrl(props.selectedSuggestion[0])}></iframe>
+      </div>
     </Paper>
   );
 }
