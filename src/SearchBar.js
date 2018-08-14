@@ -11,6 +11,39 @@ import Table from './Table.js';
 
 
 var suggestions = [];
+const styles = theme => ({
+    container: {
+        flexGrow: 1,
+        position: 'relative',
+        height: 50,
+    },
+    suggestionsContainerOpen: {
+        position: 'absolute',
+        zIndex: 1,
+        marginTop: theme.spacing.unit,
+        left: 0,
+        right: 0,
+        marginLeft: 250,
+        marginRight: 250,
+    },
+    suggestion: {
+        display: 'block',
+    },
+    suggestionsList: {
+        margin: 0,
+        padding: 0,
+        listStyleType: 'none',
+    },
+    card: theme.mixins.gutters({
+        paddingTop: 16,
+        paddingBottom: 16,
+        marginTop: theme.spacing.unit * 3,
+        marginLeft: 350,
+        marginRight: 350
+
+    }),
+});
+
 
 function renderInput(inputProps) {
     const { classes, ref, ...other } = inputProps;
@@ -82,7 +115,6 @@ function removeDuplicates(originalArray, objKey) {
             values.push(value);
         }
     }
-
     return trimmedArray;
 }
 
@@ -102,38 +134,6 @@ function getSuggestions(value) {
     return removeDuplicates(suggestions, "station");
 }
 
-const styles = theme => ({
-    container: {
-        flexGrow: 1,
-        position: 'relative',
-        height: 50,
-    },
-    suggestionsContainerOpen: {
-        position: 'absolute',
-        zIndex: 1,
-        marginTop: theme.spacing.unit,
-        left: 0,
-        right: 0,
-        marginLeft: 250,
-        marginRight: 250,
-    },
-    suggestion: {
-        display: 'block',
-    },
-    suggestionsList: {
-        margin: 0,
-        padding: 0,
-        listStyleType: 'none',
-    },
-    card: theme.mixins.gutters({
-        paddingTop: 16,
-        paddingBottom: 16,
-        marginTop: theme.spacing.unit * 3,
-        marginLeft: 350,
-        marginRight: 350
-
-    }),
-});
 
 class IntegrationAutosuggest extends React.Component {
     state = {
@@ -145,7 +145,7 @@ class IntegrationAutosuggest extends React.Component {
     handleSuggestionsFetchRequested = ({ value }) => {
         this.setState({
             suggestions: getSuggestions(value)
-        });
+      });
     };
 
     handleSuggestionsClearRequested = () => {
@@ -161,9 +161,10 @@ class IntegrationAutosuggest extends React.Component {
     };
 
     onSuggestionSelected = (event, { suggestion }) => {
+        console.log(suggestions)
         this.setState({
             showResults: true,
-            selectedSuggestion: suggestion
+            selectedSuggestion: suggestions
         });
     }
 

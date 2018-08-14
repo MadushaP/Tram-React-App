@@ -36,21 +36,45 @@ const styles = theme => ({
 });
 
 let id = 0;
-function createData(stationName, line, destination, arrivalTime) {
+function createData(stationName, line, destination, arrivalTime, direction) {
   id += 1;
-  return { id, stationName, line , destination, arrivalTime };
+  return { id, stationName, line, destination, arrivalTime, direction };
+}
+
+function removeDuplicates(originalArray, objKey) {
+  var trimmedArray = [];
+  var values = [];
+  var value;
+
+  for (var i = 0; i < originalArray.length; i++) {
+    value = originalArray[i][objKey];
+
+    if (values.indexOf(value) === -1) {
+      trimmedArray.push(originalArray[i]);
+      values.push(value);
+    }
+  }
+  return trimmedArray;
 }
 
 function extractArrivalTime(selectedStation) {
-  var arrivalTime = [selectedStation.Wait0, selectedStation.Wait1, selectedStation.Wait2]
-  var arrivals = []
+  var arrivalsWithExtractedTimes = []
+  var cleanArrivals = []
 
-  arrivalTime.map(time => {
-    if(time != "") {
-      arrivals.push(createData(selectedStation.StationLocation, selectedStation.Line, selectedStation.Dest0, time))
+ selectedStation.map(station => {
+  arrivalsWithExtractedTimes.push(
+      createData(station.StationLocation, station.Line, station.Dest0, station.Wait0, station.Direction),
+      createData(station.StationLocation, station.Line, station.Dest0, station.Wait1, station.Direction),
+      createData(station.StationLocation, station.Line, station.Dest0, station.Wait2, station.Direction))
     }
-  })
-  return arrivals;
+  )
+
+  arrivalsWithExtractedTimes.forEach(element => {
+    if(element.destination.length || element.arrivalTime.length || element.arrivalTime.length > 1)
+    cleanArrivals.push(element)    
+  });
+  
+  return  removeDuplicates(cleanArrivals, "arrivalTime");
 }
 
 function CustomizedTable(props) {
@@ -61,18 +85,20 @@ function CustomizedTable(props) {
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
-            <CustomTableCell>Station</CustomTableCell>    
+            <CustomTableCell>Station</CustomTableCell>
             <CustomTableCell>Line</CustomTableCell>
+            <CustomTableCell>Direction</CustomTableCell>
             <CustomTableCell>Destination</CustomTableCell>
             <CustomTableCell>Arrival time</CustomTableCell>
           </TableRow>
         </TableHead>
-        <TableBody>          
+        <TableBody>
           {extractArrivalTime(props.selectedSuggestion).map(station => {
             return (
               <TableRow className={classes.row} key={station.id}>
                 <CustomTableCell component="th" scope="row"> {station.stationName} </CustomTableCell>
                 <CustomTableCell component="th" scope="row"> {station.line} </CustomTableCell>
+                <CustomTableCell component="th" scope="row"> {station.direction} </CustomTableCell>
                 <CustomTableCell component="th" scope="row"> {station.destination} </CustomTableCell>
                 <CustomTableCell > In {station.arrivalTime} minutes.</CustomTableCell>
               </TableRow>
