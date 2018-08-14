@@ -195,7 +195,7 @@ class IntegrationAutosuggest extends React.Component {
                     }}
                     onSuggestionSelected={this.onSuggestionSelected}
                 />
-                {this.state.showResults ? <Table selectedStation={this.state.selectedSuggestion} /> : null}
+                {this.state.showResults ? <Table selectedSuggestion={this.state.selectedSuggestion} /> : null}
             </div>
 
         );

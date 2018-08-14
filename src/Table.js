@@ -21,12 +21,12 @@ const CustomTableCell = withStyles(theme => ({
 const styles = theme => ({
   root: {
     width: '50%',
-    marginLeft: 420,
+    marginLeft: '25%',
     marginTop: theme.spacing.unit * 3,
     overflowX: 'auto',
   },
   table: {
-    minWidth: 700,
+    minWidth: 70,
   },
   row: {
     '&:nth-of-type(odd)': {
@@ -36,48 +36,39 @@ const styles = theme => ({
 });
 
 let id = 0;
-function createData(destination, arrivalTime, fat, carbs, protein) {
+function createData(stationName, line, destination, arrivalTime) {
   id += 1;
-  return { id, destination, arrivalTime, fat, carbs, protein };
+  return { id, stationName, line , destination, arrivalTime };
 }
 
-const data = [
-  createData('Etihad Campus', "12.05"),
-  createData('New Islington', "12.25"),
-];
-
-const data2 = [
-  createData('Manchester Airport', "17.15"),
-  createData('Deansgate', "18.00"),
-]
-
 function getData(selectedStation) {
-  if(selectedStation == "Media City")
-    return data;
-    else 
-    return data2;
+  console.log(selectedStation)
+ return [createData(selectedStation.StationLocation, selectedStation.Line, selectedStation.Dest0, selectedStation.Wait0)];
 } 
 
 function CustomizedTable(props) {
   const { classes } = props;
+
   return (
     <Paper className={classes.root}>
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
+            <CustomTableCell>Station</CustomTableCell>    
+            <CustomTableCell>Line</CustomTableCell>
             <CustomTableCell>Destination</CustomTableCell>
-            <CustomTableCell numeric>Arrival time</CustomTableCell>
+            <CustomTableCell>Arrival time</CustomTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           
-          {getData(props.selectedStation).map(n => {
+          {getData(props.selectedSuggestion).map(station => {
             return (
-              <TableRow className={classes.row} key={n.id}>
-                <CustomTableCell component="th" scope="row">
-                  {n.destination}
-                </CustomTableCell>
-                <CustomTableCell numeric>{n.arrivalTime}</CustomTableCell>
+              <TableRow className={classes.row} key={station.id}>
+                <CustomTableCell component="th" scope="row"> {station.stationName} </CustomTableCell>
+                <CustomTableCell component="th" scope="row"> {station.line} </CustomTableCell>
+                <CustomTableCell component="th" scope="row"> {station.destination} </CustomTableCell>
+                <CustomTableCell > In {station.arrivalTime} minutes.</CustomTableCell>
               </TableRow>
             );
           })}
