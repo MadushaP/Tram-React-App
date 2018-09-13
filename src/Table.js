@@ -33,10 +33,6 @@ const styles = theme => ({
     '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.background.default,
     },
-  },
-  map: {
-    width: '100%',
-    height: '450px'
   }
 });
 
@@ -136,7 +132,7 @@ function CustomizedTable(props) {
       </Table>
     </Paper>
      <GoogleMap selectedSuggestion={props.selectedSuggestion[0]}></GoogleMap>
-     </div>
+    </div>
 
   );
 }

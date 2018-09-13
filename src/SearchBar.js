@@ -118,19 +118,40 @@ function removeDuplicates(originalArray, objKey) {
     return trimmedArray;
 }
 
-function checkSubtring(suggestion, value) {
-    return (suggestion.StationLocation.toLowerCase()).includes(value.toLowerCase());
-}
+
+
 
 function getSuggestions(value) {
+    const inputValue = value.trim().toLowerCase();
+    const inputLength = inputValue.length;
+    let count = 0;
+
     fetch('http://localhost:8080/tramstops')
         .then(response => response.json())
         .then(response => {
             suggestions = response.value
-        }).then(function () {
-            suggestions = suggestions.filter(((suggestion) => { return checkSubtring(suggestion, value) }))
         })
-    return removeDuplicates(suggestions, "station");
+
+    let suggestionList = inputLength === 0
+        ? []
+        : suggestions.filter(suggestion => {
+            const keep =
+                count < 5 && suggestion.StationLocation.toLowerCase().slice(0, inputLength) === inputValue;
+
+            if (keep) {
+                count += 1;
+            }
+
+            return keep;
+        });
+
+    let unique = []
+    for (var i = 0; i < suggestionList.length; i++) {
+        if (unique.findIndex(a => a.StationLocation == suggestionList[i].StationLocation) == -1) {
+            unique.push(suggestionList[i])
+        }
+    }
+    return unique;
 }
 
 function filterExactStation(suggestions, suggestion) {
