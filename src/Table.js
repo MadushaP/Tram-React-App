@@ -7,15 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-
-
-var mediaCityMapUrl = ""
-var piccadilyUrl = ""
-
-fetch('http://localhost:8080/mapApi').then(response => response.text()).then(key => {
-  mediaCityMapUrl = "https://www.google.com/maps/embed/v1/place?q=place_id:ChIJs9oFOTepe0gRQxVZHolOKEg&key=[Key]".replace("[Key]", key)
-  piccadilyUrl = "https://www.google.com/maps/embed/v1/place?q=place_id:ChIJwyA1or-xe0gRp7KMIqjUE0w&key=[Key]".replace("[Key]", key)
-})
+import GoogleMap from './Map.js'
 
 const CustomTableCell = withStyles(theme => ({
   head: {
@@ -42,6 +34,10 @@ const styles = theme => ({
       backgroundColor: theme.palette.background.default,
     },
   },
+  map: {
+    width: '100%',
+    height: '450px'
+  }
 });
 
 let id = 0;
@@ -109,21 +105,6 @@ function formatArrivalTime(arrivalTime) {
     return arrivalTime + " minutes";
 }
 
-function stationToMapUrl(station) {
-  if(station == null)
-    return;
-  switch (station.StationLocation) {
-    case "MediaCityUK":
-      return mediaCityMapUrl;
-      break;
-    case "Piccadilly Gardens":
-      return piccadilyUrl;
-      break;
-    default:
-      return ""
-  }
-}
-
 function CustomizedTable(props) {
   const { classes } = props;
   return (
@@ -152,9 +133,7 @@ function CustomizedTable(props) {
           })}
         </TableBody>
       </Table>
-      <div>        
-        <iframe width="100%" height="450" src={stationToMapUrl(props.selectedSuggestion[0])}></iframe>
-      </div>
+      <GoogleMap selectedSuggestion={props.selectedSuggestion[0]}></GoogleMap>
     </Paper>
   );
 }
