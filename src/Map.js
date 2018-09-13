@@ -3,8 +3,12 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
     map: {
-        width: '100%',
-        height: '450px'
+        width: '67%',
+        height: '450px',
+    },
+    space: {
+        'padding-top': '30px',
+        'margin-left': '25%'
     }
 });
 
@@ -34,7 +38,7 @@ function stationToMapUrl(station) {
 function GoogleMap(props) {
     const { classes } = props;
     return (
-        <div >
+        <div className={classes.space} >
          <iframe className={classes.map} src={stationToMapUrl(props.selectedSuggestion)}></iframe> 
         </div>
     );

@@ -108,6 +108,7 @@ function formatArrivalTime(arrivalTime) {
 function CustomizedTable(props) {
   const { classes } = props;
   return (
+    <div>
     <Paper className={classes.root}>
       <Table className={classes.table}>
         <TableHead>
@@ -133,8 +134,10 @@ function CustomizedTable(props) {
           })}
         </TableBody>
       </Table>
-      <GoogleMap selectedSuggestion={props.selectedSuggestion[0]}></GoogleMap>
     </Paper>
+     <GoogleMap selectedSuggestion={props.selectedSuggestion[0]}></GoogleMap>
+     </div>
+
   );
 }
 
