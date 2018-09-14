@@ -8,6 +8,9 @@ import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
 import { withStyles } from '@material-ui/core/styles';
 import Table from './Table.js';
+import Avatar from '@material-ui/core/Avatar';
+import Chip from '@material-ui/core/Chip';
+import FaceIcon from '@material-ui/icons/Face';
 
 
 const styles = theme => ({
@@ -40,6 +43,13 @@ const styles = theme => ({
         marginLeft: 350,
         marginRight: 350
     }),
+    chip:({
+        marginTop: '2%',
+        marginLeft: '21%',
+        'background-color': '#f50057',
+        color: 'white',
+        'font-weight': 'bold'
+    })
 });
 
 
@@ -175,6 +185,7 @@ class IntegrationAutosuggest extends React.Component {
 
         return (
             <div>
+
                 <Autosuggest
                     theme={{
                         container: classes.container,
@@ -198,6 +209,15 @@ class IntegrationAutosuggest extends React.Component {
                     }}
                     onSuggestionSelected={this.onSuggestionSelected}
                 />
+
+                <div>
+                    {this.state.selectedSuggestion ? <Chip
+                        label={this.state.selectedSuggestion[0].MessageBoard}
+                        className={classes.chip}
+                        color=""
+                    /> : null}
+                </div>
+
                 {this.state.showResults ? <Table selectedSuggestion={this.state.selectedSuggestion} /> : null}
             </div>
 
