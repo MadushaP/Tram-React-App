@@ -10,7 +10,6 @@ import { withStyles } from '@material-ui/core/styles';
 import Table from './Table.js';
 
 
-var suggestions = [];
 const styles = theme => ({
     container: {
         flexGrow: 1,
@@ -102,6 +101,8 @@ function getSuggestionValue(suggestion) {
     return suggestion.StationLocation;
 }
 
+let suggestions = [];
+
 function getSuggestions(value) {
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
@@ -128,7 +129,7 @@ function getSuggestions(value) {
 
     let unique = []
     for (var i = 0; i < suggestionList.length; i++) {
-        if (unique.findIndex(a => a.StationLocation == suggestionList[i].StationLocation) == -1) {
+        if (unique.findIndex(a => a.StationLocation === suggestionList[i].StationLocation) === -1) {
             unique.push(suggestionList[i])
         }
     }
@@ -136,7 +137,7 @@ function getSuggestions(value) {
 }
 
 function filterExactStation(suggestions, selectedStation) {
-    return suggestions.filter(suggestion => (suggestion.StationLocation == selectedStation.StationLocation) &&  (suggestion.Direction == "Incoming"));
+    return suggestions.filter(suggestion => (suggestion.StationLocation === selectedStation.StationLocation) &&  (suggestion.Direction === "Incoming"));
 }
 
 class IntegrationAutosuggest extends React.Component {

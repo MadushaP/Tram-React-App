@@ -15,10 +15,10 @@ const styles = theme => ({
 var mediaCityMapUrl = ""
 var piccadilyUrl = ""
 
-    fetch('http://localhost:8080/mapApi').then(response => response.text()).then(key => {
+fetch('http://localhost:8080/mapApi').then(response => response.text()).then(key => {
         mediaCityMapUrl = "https://www.google.com/maps/embed/v1/place?q=place_id:ChIJs9oFOTepe0gRQxVZHolOKEg&key=[Key]".replace("[Key]", key)
         piccadilyUrl = "https://www.google.com/maps/embed/v1/place?q=place_id:ChIJwyA1or-xe0gRp7KMIqjUE0w&key=[Key]".replace("[Key]", key)
-    })
+})
 
 function stationToMapUrl(station) {
     if (station == null)
@@ -26,10 +26,8 @@ function stationToMapUrl(station) {
     switch (station.StationLocation) {
         case "MediaCityUK":
             return mediaCityMapUrl;
-            break;
         case "Piccadilly Gardens":
             return piccadilyUrl;
-            break;
         default:
             return ""
     }
