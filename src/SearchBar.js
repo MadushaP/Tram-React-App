@@ -43,7 +43,7 @@ const styles = theme => ({
         marginLeft: 350,
         marginRight: 350
     }),
-    chip:({
+    chip: ({
         marginTop: '2%',
         marginLeft: '21%',
         'background-color': '#f50057',
@@ -148,11 +148,21 @@ function filterExactStation(suggestions, selectedStation) {
     return suggestions.filter(suggestion => (suggestion.StationLocation === selectedStation.StationLocation));
 }
 
+function renderMessageBoard(selectedSuggestion) {
+    if (selectedSuggestion == null)
+        return false;
+    if (selectedSuggestion[0].MessageBoard == "<no message>")
+        return false;
+    else
+        return true;
+}
+
 class IntegrationAutosuggest extends React.Component {
     state = {
         value: '',
         suggestions: [],
-        showResults: false
+        showResults: false,
+        showWarning: false
     };
 
     handleSuggestionsFetchRequested = ({ value }) => {
@@ -211,10 +221,9 @@ class IntegrationAutosuggest extends React.Component {
                 />
 
                 <div>
-                    {this.state.selectedSuggestion ? <Chip
+                    { renderMessageBoard(this.state.selectedSuggestion) ? <Chip
                         label={this.state.selectedSuggestion[0].MessageBoard}
                         className={classes.chip}
-                        color=""
                     /> : null}
                 </div>
 
