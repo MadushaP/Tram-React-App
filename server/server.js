@@ -20,7 +20,7 @@ router.get('/mapApi', function(req, res) {
 
 router.get('/tramstops', function(req, res) {
     var options = {
-        url: 'https://api.tfgm.com/odata/Metrolinks?$top=500',
+        url: 'https://api.tfgm.com/odata/Metrolinks?$top=1000',
         headers: {
           'User-Agent': 'TramApp',
           'Ocp-Apim-Subscription-Key': 'a5d66354dc2642f681f9b24159f49999'

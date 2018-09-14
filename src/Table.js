@@ -21,7 +21,6 @@ const CustomTableCell = withStyles(theme => ({
 
 const styles = theme => ({
   root: {
-    height: '500px',
     width: '50%',
     marginLeft: '25%',
     marginTop: theme.spacing.unit * 3,
@@ -66,23 +65,26 @@ function compareStrings(a, b) {
   return (a < b) ? -1 : (a > b) ? 1 : 0;
 }
 
-function cleanseData(arrivalsWithExtractedTime) {
+function sortArrivalTime(dataWithRemovedDuplication) {
+  return dataWithRemovedDuplication.sort(function (a, b) {
+    return compareStrings(a.arrivalTime, b.arrivalTime);
+  });
+}
+
+function cleanseData(arrivalsWithExtracted) {
   var cleanArrivals = []
 
-  arrivalsWithExtractedTime.forEach(element => {
+  arrivalsWithExtracted.forEach(element => {
     if (element.destination.length || element.arrivalTime.length > 1)
       cleanArrivals.push(element)
   });
   var dataWithRemovedDuplication = removeDuplicates(cleanArrivals, "arrivalTime");
-
-  return dataWithRemovedDuplication.sort(function (a, b) {
-    return compareStrings(a.arrivalTime, b.arrivalTime);
-  }).sort(function (a, b) {
-    return compareStrings(a.direction, b.direction);
-  });
+  var sortedDestinations =  sortArrivalTime(dataWithRemovedDuplication)
+  
+  return sortedDestinations;
 }
 
-function extractArrivalTime(selectedStation) {
+function extractArrival(selectedStation) {
   var arrivalsWithExtractedTimes = []
 
   selectedStation.map(station => {
@@ -110,21 +112,19 @@ function CustomizedTable(props) {
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
-            <CustomTableCell>Station</CustomTableCell>
+            <CustomTableCell>Destination</CustomTableCell>
             <CustomTableCell>Line</CustomTableCell>
             <CustomTableCell>Direction</CustomTableCell>
-            <CustomTableCell>Destination</CustomTableCell>
             <CustomTableCell>Arrival time</CustomTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {extractArrivalTime(props.selectedSuggestion).map(station => {
+          {extractArrival(props.selectedSuggestion).map(station => {
             return (
               <TableRow className={classes.row} key={station.id}>
-                <CustomTableCell component="th" scope="row"> {station.stationName} </CustomTableCell>
+                <CustomTableCell component="th" scope="row"> {station.destination} </CustomTableCell>
                 <CustomTableCell component="th" scope="row"> {station.line} </CustomTableCell>
                 <CustomTableCell component="th" scope="row"> {station.direction} </CustomTableCell>
-                <CustomTableCell component="th" scope="row"> {station.destination} </CustomTableCell>
                 <CustomTableCell >{formatArrivalTime(station.arrivalTime)}</CustomTableCell>
               </TableRow>
             );

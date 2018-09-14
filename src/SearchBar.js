@@ -135,8 +135,8 @@ function getSuggestions(value) {
     return unique;
 }
 
-function filterExactStation(suggestions, suggestion) {
-    return suggestions.filter(a => a.StationLocation = suggestion.StationLocation);
+function filterExactStation(suggestions, selectedStation) {
+    return suggestions.filter(suggestion => (suggestion.StationLocation == selectedStation.StationLocation) &&  (suggestion.Direction == "Incoming"));
 }
 
 class IntegrationAutosuggest extends React.Component {
