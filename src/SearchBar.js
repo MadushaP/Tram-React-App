@@ -39,7 +39,6 @@ const styles = theme => ({
         marginTop: theme.spacing.unit * 3,
         marginLeft: 350,
         marginRight: 350
-
     }),
 });
 
@@ -123,7 +122,6 @@ function getSuggestions(value) {
             if (keep) {
                 count += 1;
             }
-
             return keep;
         });
 
@@ -137,7 +135,7 @@ function getSuggestions(value) {
 }
 
 function filterExactStation(suggestions, selectedStation) {
-    return suggestions.filter(suggestion => (suggestion.StationLocation === selectedStation.StationLocation) &&  (suggestion.Direction === "Incoming"));
+    return suggestions.filter(suggestion => (suggestion.StationLocation === selectedStation.StationLocation));
 }
 
 class IntegrationAutosuggest extends React.Component {
@@ -193,7 +191,7 @@ class IntegrationAutosuggest extends React.Component {
                     renderSuggestion={renderSuggestion}
                     inputProps={{
                         classes,
-                        placeholder: 'Search for a tramstop',
+                        placeholder: 'Departure Station',
                         value: this.state.value,
                         onChange: this.handleChange,
                         type: 'search'
