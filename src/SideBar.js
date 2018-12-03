@@ -1,5 +1,5 @@
 import React from 'react';
-import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
+import SideNav, {Toggle, Nav, NavItem, NavIcon, NavText} from '@trendmicro/react-sidenav';
 
 function SideBar(props) {
     const {classes} = props;
@@ -8,34 +8,24 @@ function SideBar(props) {
             onSelect={(selected) => {
                 // Add code here
             }}
-           >
-            <SideNav.Toggle />
-            <SideNav.Nav defaultSelected="home">
+        >
+            <SideNav.Toggle/>
+            <SideNav.Nav>
                 <NavItem eventKey="home">
                     <NavIcon>
-                        <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
+                        <i className="fa fa-fw fa-home" style={{fontSize: '1.75em', color: 'black'}}/>
                     </NavIcon>
-                    <NavText>
+                    <NavText style={{fontSize: '1.2em', color:'black'}}>
                         Home
                     </NavText>
                 </NavItem>
-                <NavItem eventKey="charts">
+                <NavItem eventKey="tracker">
                     <NavIcon>
-                        <i className="fa fa-fw fa-line-chart" style={{ fontSize: '1.75em' }} />
+                        <i className="fas fa-search-location" style={{fontSize: '1.75em', color: 'black'}}/>
                     </NavIcon>
-                    <NavText>
-                        Charts
+                    <NavText style={{fontSize: '1.2em', color:'black'}}>
+                        Tracker
                     </NavText>
-                    <NavItem eventKey="charts/linechart">
-                        <NavText>
-                            Line Chart
-                        </NavText>
-                    </NavItem>
-                    <NavItem eventKey="charts/barchart">
-                        <NavText>
-                            Bar Chart
-                        </NavText>
-                    </NavItem>
                 </NavItem>
             </SideNav.Nav>
         </SideNav>
