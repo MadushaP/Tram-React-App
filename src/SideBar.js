@@ -1,6 +1,7 @@
 import React from 'react';
 import SideNav, {Toggle, Nav, NavItem, NavIcon, NavText} from '@trendmicro/react-sidenav';
 import {Link} from 'react-router-dom'
+import {LinkContainer} from "react-router-bootstrap";
 
 function SideBar(props) {
     const {classes} = props;
@@ -12,23 +13,30 @@ function SideBar(props) {
         >
             <SideNav.Toggle/>
             <SideNav.Nav>
-                <NavItem eventKey="home">
-                    <NavIcon>
-                        <Link to='/'> <i className="fa fa-fw fa-home" style={{fontSize: '1.75em', color: 'black'}}/>
-                        </Link>
-                    </NavIcon>
-                    <NavText style={{fontSize: '1.2em', color: 'black'}}>
-                        <Link to='/'>Home</Link>
-                    </NavText>
-                </NavItem>
-                <NavItem eventKey="tracker">
-                    <NavIcon>
-                        <Link to='/Tracker'>   <i className="fas fa-search-location" style={{fontSize: '1.75em', color: 'black'}}/></Link>
-                    </NavIcon>
-                    <NavText style={{fontSize: '1.2em', color: 'black'}}>
-                        <Link to='/Tracker'> Tracker </Link>
-                    </NavText>
-                </NavItem>
+                <LinkContainer to="/">
+                    <NavItem eventKey="home">
+                        <NavIcon>
+                            <Link to='/'> <i className="fa fa-fw fa-home" style={{fontSize: '1.75em', color: 'black'}}/>
+                            </Link>
+                        </NavIcon>
+                        <NavText style={{fontSize: '1.2em', color: 'black'}}>
+                            <Link to='/'>Home</Link>
+                        </NavText>
+                    </NavItem>
+                </LinkContainer>
+                <LinkContainer to="/Tracker">
+                    <NavItem eventKey="tracker">
+                        <NavIcon>
+                            <Link to='/Tracker'> <i className="fas fa-search-location"
+                                                    style={{fontSize: '1.75em', color: 'black'}}/></Link>
+                        </NavIcon>
+                        <NavText style={{fontSize: '1.2em', color: 'black'}}>
+                            <Link to='/Tracker'> Tracker </Link>
+                        </NavText>
+                    </NavItem>
+                </LinkContainer>
+
+
             </SideNav.Nav>
         </SideNav>
     );
