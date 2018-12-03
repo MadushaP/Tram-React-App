@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -9,38 +9,38 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
 const styles = {
-  root: {
-    flexGrow: 1,
-  },
-  flex: {
-    flex: 1,
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
+    root: {
+        flexGrow: 1,
+    },
+    flex: {
+        flex: 1,
+    },
+    menuButton: {
+        marginLeft: -12,
+        marginRight: 20,
+    },
 };
 
 function ButtonAppBar(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
-      <AppBar position="static" style={{ backgroundColor: '#f4c441' }}>
-        <Toolbar>
-          <IconButton className={classes.menuButton}  aria-label="Menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="title" className={classes.flex}>
-            Metro Tram App
-          </Typography>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+    const {classes} = props;
+    return (
+        <div className={classes.root}>
+            <AppBar position="static" style={{backgroundColor: '#f4c441'}}>
+                <Toolbar>
+                    <IconButton className={classes.menuButton} aria-label="Menu">
+                        <MenuIcon/>
+                    </IconButton>
+                    <Typography variant="title" className={classes.flex}>
+                        Metro Tram App
+                    </Typography>
+                </Toolbar>
+            </AppBar>
+        </div>
+    );
 }
 
 ButtonAppBar.propTypes = {
-  classes: PropTypes.object.isRequired,
+    classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(ButtonAppBar);
