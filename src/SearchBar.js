@@ -10,6 +10,9 @@ import {withStyles} from '@material-ui/core/styles';
 import Table from './Table.js';
 import Chip from '@material-ui/core/Chip';
 import FaceIcon from '@material-ui/icons/Face';
+import { Switch, Route } from 'react-router-dom'
+import Tracker from './Tracker'
+
 
 const styles = theme => ({
     container: {
@@ -193,7 +196,6 @@ class IntegrationAutosuggest extends React.Component {
 
         return (
             <div>
-
                 <Autosuggest
                     theme={{
                         container: classes.container,
