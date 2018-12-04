@@ -8,7 +8,7 @@ const styles = theme => ({
     },
     space: {
         'padding-top': '30px',
-        'margin-left': '25%'
+        'marginLeft': '25%'
     }
 });
 

@@ -13,32 +13,30 @@ function SideBar(props) {
         >
             <SideNav.Toggle/>
             <SideNav.Nav>
-                <LinkContainer to="/">
-                    <NavItem eventKey="home">
+                <IndexLinkContainer to="/" >
+                    <NavItem>
                         <NavIcon>
-                            <Link to='/'> <i className="fa fa-fw fa-home" style={{fontSize: '1.75em', color: 'black'}}/>
-                            </Link>
+                             <i className="fa fa-fw fa-home" style={{fontSize: '1.75em', color: 'black'}}/>
                         </NavIcon>
                         <NavText style={{fontSize: '1.2em', color: 'black'}}>
-                            <Link to='/'>Home</Link>
+                           Home
                         </NavText>
                     </NavItem>
-                </LinkContainer>
-                <LinkContainer to="/Tracker">
-                    <NavItem eventKey="tracker">
+                </IndexLinkContainer>
+                <IndexLinkContainer to="/Tracker">
+                    <NavItem >
                         <NavIcon>
-                            <Link to='/Tracker'> <i className="fas fa-search-location"
-                                                    style={{fontSize: '1.75em', color: 'black'}}/></Link>
+                             <i className="fas fa-search-location"
+                                                    style={{fontSize: '1.75em', color: 'black'}}/>
                         </NavIcon>
                         <NavText style={{fontSize: '1.2em', color: 'black'}}>
-                            <Link to='/Tracker'> Tracker </Link>
+                          Tracker
                         </NavText>
                     </NavItem>
-                </LinkContainer>
-
-
+                </IndexLinkContainer>
             </SideNav.Nav>
         </SideNav>
+
     );
 }
 
