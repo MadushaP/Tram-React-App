@@ -9,9 +9,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import {withStyles} from '@material-ui/core/styles';
 import Table from './Table.js';
 import Chip from '@material-ui/core/Chip';
-import FaceIcon from '@material-ui/icons/Face';
-import { Switch, Route } from 'react-router-dom'
-import Canvas from './Canvas'
 
 
 const styles = theme => ({

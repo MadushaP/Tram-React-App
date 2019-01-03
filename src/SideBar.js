@@ -1,10 +1,8 @@
 import React from 'react';
-import SideNav, {Toggle, Nav, NavItem, NavIcon, NavText} from '@trendmicro/react-sidenav';
-import {Link} from 'react-router-dom'
+import SideNav, {NavItem, NavIcon, NavText} from '@trendmicro/react-sidenav';
 import {LinkContainer} from "react-router-bootstrap";
 
 function SideBar(props) {
-    const {classes} = props;
     return (
         <SideNav
             onSelect={(selected) => {

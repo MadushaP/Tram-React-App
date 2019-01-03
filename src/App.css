@@ -363,4 +363,7 @@
     box-sizing: inherit;
 }
 
-/*# sourceMappingURL=react-sidenav.css.map*/
+canvas {
+ width: 100%;
+ height: 100%;
+}
