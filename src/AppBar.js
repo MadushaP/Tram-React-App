@@ -13,6 +13,7 @@ const styles = {
     },
     flex: {
         flex: 1,
+        textAlign: "center"
     },
     menuButton: {
         marginLeft: -12,
@@ -31,7 +32,7 @@ function ButtonAppBar(props) {
                         <MenuIcon/>
                     </IconButton>
                     <Typography variant="title" className={classes.flex}>
-                        Metro Tram App
+                    {props.pageLocation}
                     </Typography>
                 </Toolbar>
             </AppBar>

@@ -8,12 +8,12 @@ function SideBar(props) {
     return (
         <SideNav
             onSelect={(selected) => {
-                // Add code here
+                // Add on select css change
             }}
         >
             <SideNav.Toggle/>
             <SideNav.Nav>
-                <IndexLinkContainer to="/" >
+                <LinkContainer to="/" >
                     <NavItem>
                         <NavIcon>
                              <i className="fa fa-fw fa-home" style={{fontSize: '1.75em', color: 'black'}}/>
@@ -22,8 +22,8 @@ function SideBar(props) {
                            Home
                         </NavText>
                     </NavItem>
-                </IndexLinkContainer>
-                <IndexLinkContainer to="/Tracker">
+                </LinkContainer>
+                <LinkContainer to="/Tracker">
                     <NavItem >
                         <NavIcon>
                              <i className="fas fa-search-location"
@@ -33,7 +33,7 @@ function SideBar(props) {
                           Tracker
                         </NavText>
                     </NavItem>
-                </IndexLinkContainer>
+                </LinkContainer>
             </SideNav.Nav>
         </SideNav>
 
