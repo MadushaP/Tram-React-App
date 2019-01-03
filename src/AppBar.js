@@ -27,7 +27,6 @@ function ButtonAppBar(props) {
         <div className={classes.root}>
             <AppBar position="static" style={{backgroundColor: '#f4c441'}}>
                 <Toolbar>
-                    {/* remove icon and pad to the left */}
                     <IconButton className={classes.menuButton} aria-label="Menu">
                         <MenuIcon/>
                     </IconButton>

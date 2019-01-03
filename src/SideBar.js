@@ -19,18 +19,18 @@ function SideBar(props) {
                              <i className="fa fa-fw fa-home" style={{fontSize: '1.75em', color: 'black'}}/>
                         </NavIcon>
                         <NavText style={{fontSize: '1.2em', color: 'black'}}>
-                           Home
+                          Metro Tram
                         </NavText>
                     </NavItem>
                 </LinkContainer>
-                <LinkContainer to="/Tracker">
+                <LinkContainer to="/Canvas">
                     <NavItem >
                         <NavIcon>
-                             <i className="fas fa-search-location"
+                             <i className="fas fa-shapes"
                                                     style={{fontSize: '1.75em', color: 'black'}}/>
                         </NavIcon>
                         <NavText style={{fontSize: '1.2em', color: 'black'}}>
-                          Tracker
+                          3D Canvas
                         </NavText>
                     </NavItem>
                 </LinkContainer>

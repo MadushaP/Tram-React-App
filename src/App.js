@@ -27,8 +27,8 @@ class App extends Component {
             case "/":
                 this.setState({ pageLocation: "Metro Tram App" })
                 break;
-            case "/Tracker":
-                this.setState({ pageLocation: "Tracker" })
+            case "/Canvas":
+                this.setState({ pageLocation: "3D Babylon Canvas" })
         }
 
     }
