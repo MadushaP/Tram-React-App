@@ -9,7 +9,11 @@ require("/Users/pallam01/IdeaProjects/Innovation/react-material/react-material/n
 
 class App extends Component {
     state = {
-        pageLocation: "Metro Tram App"
+        pageLocation: ""
+    }
+
+    componentDidMount() {
+       this.onRouteChanged(this.props.location);
     }
 
     componentDidUpdate(prevProps) {
