@@ -59,6 +59,16 @@ class Canvas extends Component {
                 position.z =   position.z - 0.5;
                 this.setState({shapePosition: position})
                 break;
+            case "a":
+                position = Object.assign({}, this.state.shapePosition);
+                position.x =   position.x - 0.5;
+                this.setState({shapePosition: position})
+                break;
+            case "d":
+                position = Object.assign({}, this.state.shapePosition);
+                position.x =   position.x + 0.5;
+                this.setState({shapePosition: position})
+                break;
             case " ":
                 event.preventDefault();
                 position = Object.assign({}, this.state.shapePosition);
