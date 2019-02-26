@@ -5,8 +5,10 @@ import {Animation, ArcRotateCamera, Color4, Mesh, ParticleSystem, PointLight, Te
 function onSceneMount(e) {
     const {canvas, scene} = e
 
-    var emitPower = 1000;
+    var emitPower = 600;
     var gravity = -9.81;
+    var maxSize = 2.0;
+
     var particleSystem = new ParticleSystem("particles", 3000, scene);
 
     //UI Slider
@@ -16,6 +18,7 @@ function onSceneMount(e) {
 
     createSlider(panel3, "Emit Power", emitPower, particleSystem, advancedTexture);
     createSlider(panel3, "Gravity", gravity, particleSystem, advancedTexture);
+    createSlider(panel3, "Particle Size", maxSize, particleSystem, advancedTexture);
 
 
     // Setup environment
@@ -43,7 +46,7 @@ function onSceneMount(e) {
 
     // Size of each particle (random between...
     particleSystem.minSize = 0.1;
-    particleSystem.maxSize = 2.0;
+    particleSystem.maxSize = maxSize;
 
     // Life time of each particle (random between...
     particleSystem.minLifeTime = 0.5;
@@ -137,21 +140,32 @@ function createSlider(panel, headerText, initialValue, particleSystem, advancedT
 
     var slider = new GUI.Slider();
     slider.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
-    slider.minimum = 0;
-    slider.maximum = 2000;
+
+    if (headerText != "Particle Size") {
+        slider.minimum = 0;
+        slider.maximum = 2000;
+        slider.value = initialValue;
+    } else {
+        slider.minimum = 0;
+        slider.maximum = 5;
+        slider.value = initialValue;
+    }
+
+
     slider.color = "green";
-    slider.value = initialValue;
     slider.height = "20px";
     slider.width = "200px";
 
-    slider.onValueChangedObservable.add(function(value){
-        switch(headerText) {
+    slider.onValueChangedObservable.add(function (value) {
+        switch (headerText) {
             case "Emit Power":
-                particleSystem.emitRate  = value
-
+                particleSystem.emitRate = value
                 break;
             case "Gravity":
                 particleSystem.gravity = new Vector3(0, -value, 0);
+                break;
+            case "Particle Size":
+                particleSystem.maxSize = value;
                 break;
         }
     })
