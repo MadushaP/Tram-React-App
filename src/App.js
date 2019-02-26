@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './App.css';
 import AppBar from './AppBar';
 import SideBar from './SideBar';
 import Main from './Main';
-import { withRouter } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 
 require("/Users/pallam01/IdeaProjects/Innovation/react-material/react-material/node_modules/@fortawesome/fontawesome-free/css/all.css");
 
@@ -13,7 +13,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-       this.onRouteChanged(this.props.location);
+        this.onRouteChanged(this.props.location);
     }
 
     componentDidUpdate(prevProps) {
@@ -25,10 +25,14 @@ class App extends Component {
     onRouteChanged(location) {
         switch (location.pathname) {
             case "/":
-                this.setState({ pageLocation: "Metro Tram App" })
+                this.setState({pageLocation: "Metro Tram App"})
                 break;
             case "/Canvas":
-                this.setState({ pageLocation: "3D Babylon Canvas" })
+                this.setState({pageLocation: "3D Babylon Canvas"})
+                break;
+            case "/Particle":
+                this.setState({pageLocation: "3D Babylon Particle Engine"})
+                break;
         }
 
     }
@@ -36,9 +40,9 @@ class App extends Component {
     render() {
         return (
             <div>
-                <AppBar variant="raised" color="primary" pageLocation={this.state.pageLocation} />
-                <SideBar />
-                <Main />
+                <AppBar variant="raised" color="primary" pageLocation={this.state.pageLocation}/>
+                <SideBar/>
+                <Main/>
             </div>
         );
     }

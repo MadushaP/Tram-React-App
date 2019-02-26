@@ -32,6 +32,17 @@ function SideBar(props) {
                         </NavText>
                     </NavItem>
                 </LinkContainer>
+                <LinkContainer to="/Particle">
+                    <NavItem >
+                        <NavIcon>
+                            <i className="fas fa-braille"
+                               style={{fontSize: '1.75em', color: 'black'}}/>
+                        </NavIcon>
+                        <NavText style={{fontSize: '1.2em', color: 'black'}}>
+                            3D Canvas
+                        </NavText>
+                    </NavItem>
+                </LinkContainer>
             </SideNav.Nav>
         </SideNav>
 
