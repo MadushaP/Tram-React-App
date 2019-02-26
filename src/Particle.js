@@ -1,17 +1,6 @@
 import React from 'react'
 import {Engine, Scene} from 'react-babylonjs'
-import {
-    Animation,
-    ArcRotateCamera,
-    Color3,
-    Color4,
-    Mesh,
-    ParticleSystem,
-    PointLight,
-    StandardMaterial,
-    Texture,
-    Vector3
-} from 'babylonjs';
+import {Animation, ArcRotateCamera, Color4, Mesh, ParticleSystem, PointLight, Texture, Vector3} from 'babylonjs';
 
 function onSceneMount(e) {
         const { canvas, scene } = e
@@ -24,17 +13,8 @@ function onSceneMount(e) {
         // Fountain object
         var fountain = Mesh.CreateSphere("foutain", 10, 0.5, scene);
 
-        // Ground
-        var ground = Mesh.CreatePlane("ground", 50.0, scene);
-        ground.position = new Vector3(0, -10, 0);
-        ground.rotation = new Vector3(Math.PI / 2, 0, 0);
-
-        ground.material = new StandardMaterial("groundMat", scene);
-        ground.material.backFaceCulling = false;
-        ground.material.diffuseColor = new Color3(0.5, 0.5, 1);
-
         // Create a particle system
-        var particleSystem = new ParticleSystem("particles", 2000, scene);
+        var particleSystem = new ParticleSystem("particles", 3000, scene);
 
         //Texture of each particle
         particleSystem.particleTexture = new Texture(require('./static/media/bitesize.png'), scene);
@@ -55,9 +35,9 @@ function onSceneMount(e) {
 
         // Life time of each particle (random between...
         particleSystem.minLifeTime = 0.5;
-        particleSystem.maxLifeTime = 5.5;
+        particleSystem.maxLifeTime = 2.5;
 
-        // Emission rate
+        // Emission rateo
         particleSystem.emitRate = 2000;
 
         // Blend mode : BLENDMODE_ONEONE, or BLENDMODE_STANDARD
