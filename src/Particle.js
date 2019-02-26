@@ -22,7 +22,7 @@ function onSceneMount(e) {
         camera.attachControl(canvas, true);
 
         // Fountain object
-        var fountain = Mesh.CreateBox("foutain", 1.0, scene);
+        var fountain = Mesh.CreateSphere("foutain", 10, 0.5, scene);
 
         // Ground
         var ground = Mesh.CreatePlane("ground", 50.0, scene);
@@ -31,13 +31,13 @@ function onSceneMount(e) {
 
         ground.material = new StandardMaterial("groundMat", scene);
         ground.material.backFaceCulling = false;
-        ground.material.diffuseColor = new Color3(0.3, 0.3, 1);
+        ground.material.diffuseColor = new Color3(0.5, 0.5, 1);
 
         // Create a particle system
         var particleSystem = new ParticleSystem("particles", 2000, scene);
 
         //Texture of each particle
-        particleSystem.particleTexture = new Texture("textures/flare.png", scene);
+        particleSystem.particleTexture = new Texture(require('./static/media/bitesize.png'), scene);
 
         // Where the particles come from
         particleSystem.emitter = fountain; // the starting object, the emitter
@@ -45,20 +45,20 @@ function onSceneMount(e) {
         particleSystem.maxEmitBox = new Vector3(1, 0, 0); // To...
 
         // Colors of all particles
-        particleSystem.color1 = new Color4(0.7, 0.8, 1.0, 1.0);
-        particleSystem.color2 = new Color4(0.2, 0.5, 1.0, 1.0);
-        particleSystem.colorDead = new Color4(0, 0, 0.2, 0.0);
+        particleSystem.color1 = new Color4(1, 1, 1.0, 1.0);
+        particleSystem.color2 = new Color4(0, 1, 0.8, 1.0);
+        particleSystem.colorDead = new Color4(1, 0, 0, 0.8);
 
         // Size of each particle (random between...
         particleSystem.minSize = 0.1;
-        particleSystem.maxSize = 0.5;
+        particleSystem.maxSize = 1.0;
 
         // Life time of each particle (random between...
-        particleSystem.minLifeTime = 0.3;
-        particleSystem.maxLifeTime = 1.5;
+        particleSystem.minLifeTime = 0.5;
+        particleSystem.maxLifeTime = 5.5;
 
         // Emission rate
-        particleSystem.emitRate = 1500;
+        particleSystem.emitRate = 2000;
 
         // Blend mode : BLENDMODE_ONEONE, or BLENDMODE_STANDARD
         particleSystem.blendMode = ParticleSystem.BLENDMODE_ONEONE;
@@ -67,8 +67,8 @@ function onSceneMount(e) {
         particleSystem.gravity = new Vector3(0, -9.81, 0);
 
         // Direction of each particle after it has been emitted
-        particleSystem.direction1 = new Vector3(-7, 8, 3);
-        particleSystem.direction2 = new Vector3(7, 8, -3);
+        particleSystem.direction1 = new Vector3(-9, 8, 3);
+        particleSystem.direction2 = new Vector3(9, 8, -3);
 
         // Angular speed, in radians
         particleSystem.minAngularSpeed = 0;
@@ -76,7 +76,7 @@ function onSceneMount(e) {
 
         // Speed
         particleSystem.minEmitPower = 1;
-        particleSystem.maxEmitPower = 3;
+        particleSystem.maxEmitPower = 6;
         particleSystem.updateSpeed = 0.005;
 
         // Start the particle system
@@ -84,7 +84,7 @@ function onSceneMount(e) {
 
         // Fountain's animation
         var keys = [];
-        var animation = new Animation("animation", "rotation.x", 30, Animation.ANIMATIONTYPE_FLOAT,
+        var animation = new Animation("animation", "rotation.x", 60, Animation.ANIMATIONTYPE_FLOAT,
             Animation.ANIMATIONLOOPMODE_CYCLE);
         // At the animation key 0, the value of scaling is "1"
         keys.push({
