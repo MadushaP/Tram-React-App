@@ -5,45 +5,17 @@ import {Animation, ArcRotateCamera, Color4, Mesh, ParticleSystem, PointLight, Te
 function onSceneMount(e) {
     const {canvas, scene} = e
 
-
-    var emitPower = 5
+    var emitPower = 1000;
+    var gravity = -9.81;
     var particleSystem = new ParticleSystem("particles", 3000, scene);
-
 
     //UI Slider
     var advancedTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
-    advancedTexture.layer.layerMask = 2;
-
     var panel3 = new GUI.StackPanel();
-    panel3.width = "220px";
-    panel3.fontSize = "14px";
-    panel3.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
-    panel3.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_CENTER;
-    advancedTexture.addControl(panel3);
 
-    var header = new GUI.TextBlock();
-    header.text = "Emit Power";
-    header.height = "40px";
-    header.color = "white";
-    header.textHorizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
-    header.paddingTop = "10px";
-    panel3.addControl(header);
 
-    var slider = new GUI.Slider();
-    slider.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
-    slider.minimum = 0;
-    slider.maximum = 50;
-    slider.color = "green";
-    slider.value = emitPower;
-    slider.height = "20px";
-    slider.width = "200px";
-
-    slider.onValueChangedObservable.add(function(value){
-        console.log(value)
-        particleSystem.maxEmitPower  = value
-    })
-    panel3.addControl(slider);
-
+    createSlider(panel3, "Emit Power", emitPower, particleSystem, advancedTexture);
+    createSlider(panel3, "Gravity", gravity, particleSystem, advancedTexture);
 
 
     // Setup environment
@@ -78,7 +50,7 @@ function onSceneMount(e) {
     particleSystem.maxLifeTime = 4.5;
 
     // Emission rateo
-    particleSystem.emitRate = 2000;
+    particleSystem.emitRate = emitPower;
 
     // Blend mode : BLENDMODE_ONEONE, or BLENDMODE_STANDARD
     particleSystem.blendMode = ParticleSystem.BLENDMODE_ONEONE;
@@ -96,7 +68,7 @@ function onSceneMount(e) {
 
     // Speed
     particleSystem.minEmitPower = 1;
-    particleSystem.maxEmitPower = emitPower;
+    particleSystem.maxEmitPower = 8;
     particleSystem.updateSpeed = 0.005;
 
     // Start the particle system
@@ -144,6 +116,47 @@ function NonDeclarative() {
             </div>
         </div>
     )
+}
+
+function createSlider(panel, headerText, initialValue, particleSystem, advancedTexture) {
+    advancedTexture.layer.layerMask = 2;
+
+    panel.width = "220px";
+    panel.fontSize = "14px";
+    panel.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
+    panel.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_CENTER;
+    advancedTexture.addControl(panel);
+
+    var header = new GUI.TextBlock();
+    header.text = headerText;
+    header.height = "40px";
+    header.color = "white";
+    header.textHorizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+    header.paddingTop = "10px";
+    panel.addControl(header);
+
+    var slider = new GUI.Slider();
+    slider.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+    slider.minimum = 0;
+    slider.maximum = 2000;
+    slider.color = "green";
+    slider.value = initialValue;
+    slider.height = "20px";
+    slider.width = "200px";
+
+    slider.onValueChangedObservable.add(function(value){
+        switch(headerText) {
+            case "Emit Power":
+                particleSystem.emitRate  = value
+
+                break;
+            case "Gravity":
+                particleSystem.gravity = new Vector3(0, -value, 0);
+                break;
+        }
+    })
+
+    panel.addControl(slider);
 }
 
 export default NonDeclarative
