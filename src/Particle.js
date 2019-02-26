@@ -31,7 +31,7 @@ function onSceneMount(e) {
 
         // Size of each particle (random between...
         particleSystem.minSize = 0.1;
-        particleSystem.maxSize = 1.0;
+        particleSystem.maxSize = 2.0;
 
         // Life time of each particle (random between...
         particleSystem.minLifeTime = 0.5;
@@ -47,16 +47,16 @@ function onSceneMount(e) {
         particleSystem.gravity = new Vector3(0, -9.81, 0);
 
         // Direction of each particle after it has been emitted
-        particleSystem.direction1 = new Vector3(-9, 8, 3);
-        particleSystem.direction2 = new Vector3(9, 8, -3);
+        particleSystem.direction1 = new Vector3(-9, 10, 3);
+        particleSystem.direction2 = new Vector3(9, 10, -3);
 
         // Angular speed, in radians
         particleSystem.minAngularSpeed = 0;
-        particleSystem.maxAngularSpeed = Math.PI;
+        particleSystem.maxAngularSpeed = 2* Math.PI;
 
         // Speed
         particleSystem.minEmitPower = 1;
-        particleSystem.maxEmitPower = 6;
+        particleSystem.maxEmitPower = 10;
         particleSystem.updateSpeed = 0.005;
 
         // Start the particle system
@@ -75,7 +75,7 @@ function onSceneMount(e) {
         // At the animation key 50, the value of scaling is "0.2"
         keys.push({
             frame: 50,
-            value: Math.PI
+            value: 4 * Math.PI
         });
 
         // At the animation key 100, the value of scaling is "1"
