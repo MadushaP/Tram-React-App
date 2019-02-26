@@ -20,6 +20,26 @@ function onSceneMount(e) {
     createSlider(panel3, "Gravity", gravity, particleSystem, advancedTexture);
     createSlider(panel3, "Particle Size", maxSize, particleSystem, advancedTexture);
 
+    var checkbox = new GUI.Checkbox();
+    checkbox.width = "20px";
+    checkbox.height = "20px";
+    checkbox.isChecked = false;
+    checkbox.color = "green";
+    checkbox.onPointerClickObservable.add((function() {
+        if(checkbox.isChecked)
+          particleSystem.particleTexture = new Texture(require('./static/media/plasma.png'), scene);
+        else
+            particleSystem.particleTexture = new Texture(require('./static/media/bitesize.png'), scene);
+
+    }))
+
+    var panelForCheckbox = GUI.Control.AddHeader(checkbox, "Plasma", "180px", { isHorizontal: true, controlFirst: true});
+    panelForCheckbox.color = "white";
+    panelForCheckbox.height = "50px";
+    panelForCheckbox.paddingTop = "10px";
+    panelForCheckbox.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+    panel3.addControl(panelForCheckbox);
+
 
     // Setup environment
     var light0 = new PointLight("Omni", new Vector3(0, 2, 8), scene);
