@@ -1,4 +1,3 @@
-Tram react app using Transport for Greater Manchester API.
+#Frontend Learning Dashboard
 
-// Arrival times doesn't get ordered properly
-// general clean up and refactor 
+A dashboard app to experiment with frontend technologies for innovation time.
