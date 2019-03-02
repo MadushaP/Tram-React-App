@@ -5,7 +5,7 @@ A dashboard app to house frontend experiments for innovation time. Mainly using 
 
 ### Tram app
 A simple tram station departure app which uses the Transport for Great for Manchester API https://developer.tfgm.com/.
-Uses Google Maps API to render map. Note that a valid key is required for this to work in .env.
+Uses Google Maps API to render map. Note that a valid key is required (in a `.env` file) for this to work 
 
 ### Babylon JS experiments
 Used react-babylonjs to render up a quick 3d canvas using React declarations.
